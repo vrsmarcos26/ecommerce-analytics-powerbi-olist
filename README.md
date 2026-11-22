@@ -25,7 +25,7 @@ Foram utilizados dois datasets principais integrados via relacionamento relacion
 
 ### 1. Visão Executiva (Estratégico)
 Foco em faturamento, ticket médio e comportamento macro de pagamentos.
-> *[Insira a Imagem da Página 1 aqui - Ex: `![Visão Executiva](assets/pagina1.png)`]*
+> ![Uploading Executivo.png…]()
 
 ### 2. Visão Analítica (Tático e Correlações)
 Detalhamento de gargalos logísticos, taxas de conversão por status e análise de regressão linear (Ticket Médio vs. Volume).
@@ -41,10 +41,11 @@ Análise profunda com uso de Árvore Hierárquica em 4 níveis (Status > Pagamen
 3. **Comportamento de Compra:** A análise de correlação demonstra que picos de Ticket Médio (acima de R$ 160) tendem a comprimir o volume de pedidos, sugerindo oportunidades para campanhas de *cross-selling* voltadas a equilibrar ambas as métricas.
 
 ## 🚀 Como Executar o Projeto
-1. Clone este repositório: `git clone https://github.com/SeuUsuario/ecommerce-analytics-powerbi-olist.git`
+1. Clone este repositório: `git clone https://github.com/vrsmarcos26/ecommerce-analytics-powerbi-olist.git`
 2. Certifique-se de ter o [Microsoft Power BI Desktop](https://powerbi.microsoft.com/desktop/) instalado (versão gratuita).
 3. Abra o arquivo `Projeto_CD.pbix`.
-4. Os datasets já estão embarcados no modelo. Basta navegar pelas abas inferiores para interagir com o dashboard.
+4. Os datasets já estão embarcados no modelo. Basta navegar pelas abas inferiores para interagir com o dashboard.<img width="1442" height="816" alt="Executivo" src="https://github.com/user-attachments/assets/822fa4ef-b6c1-4d56-bf65-5ec0845dd481" />
+
 
 ---
 **Autor:** Marcos Vinícius  
