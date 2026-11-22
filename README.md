@@ -25,15 +25,15 @@ Foram utilizados dois datasets principais integrados via relacionamento relacion
 
 ### 1. Visão Executiva (Estratégico)
 Foco em faturamento, ticket médio e comportamento macro de pagamentos.
-> ![Uploading Executivo.png…]()
+![Visão Executiva](Executivo.png)
 
 ### 2. Visão Analítica (Tático e Correlações)
 Detalhamento de gargalos logísticos, taxas de conversão por status e análise de regressão linear (Ticket Médio vs. Volume).
-> *[Insira a Imagem da Página 2 aqui - Ex: `![Visão Analítica](assets/pagina2.png)`]*
+![Visão Analítica](Analitico.png)
 
 ### 3. Visão Exploratória (Causa Raiz)
 Análise profunda com uso de Árvore Hierárquica em 4 níveis (Status > Pagamento > Parcelas > Ano) e gráfico de cascata para variação mensal.
-> *[Insira a Imagem da Página 3 aqui - Ex: `![Visão Exploratória](assets/pagina3.png)`]*
+![Visão Exploratica](Exploratico.png)
 
 ## 💡 Principais Insights Extraídos
 1. **Dependência do Crédito:** O cartão de crédito representa **78,3%** do faturamento total (R$ 12,1 Mi), apontando para a necessidade de estratégias focadas em limite e parcelamento (com destaque para o volume de compras em 10x).
