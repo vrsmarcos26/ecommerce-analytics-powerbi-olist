@@ -44,7 +44,7 @@ Análise profunda com uso de Árvore Hierárquica em 4 níveis (Status > Pagamen
 1. Clone este repositório: `git clone https://github.com/vrsmarcos26/ecommerce-analytics-powerbi-olist.git`
 2. Certifique-se de ter o [Microsoft Power BI Desktop](https://powerbi.microsoft.com/desktop/) instalado (versão gratuita).
 3. Abra o arquivo `Projeto_CD.pbix`.
-4. Os datasets já estão embarcados no modelo. Basta navegar pelas abas inferiores para interagir com o dashboard.<img width="1442" height="816" alt="Executivo" src="https://github.com/user-attachments/assets/822fa4ef-b6c1-4d56-bf65-5ec0845dd481" />
+4. Os datasets já estão embarcados no modelo. Basta navegar pelas abas inferiores para interagir com o dashboard.
 
 
 ---
