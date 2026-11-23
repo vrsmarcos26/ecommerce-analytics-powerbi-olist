@@ -42,3 +42,60 @@ ecommerce-analytics-powerbi-olist/
 ├── Exploratico.png     # Captura da camada 3: Visão Exploratória
 ├── LICENSE             # Licença do repositório
 └── README.md           # Documentação do projeto
+```
+
+---
+
+## 📈 Estrutura do Dashboard
+
+### 1. Visão Executiva (Estratégico)
+Foco em faturamento total, ticket médio, volume de pedidos e comportamento macro dos meios de pagamento.
+
+![Visão Executiva](Executivo.png)
+
+### 2. Visão Analítica (Tático e Correlações)
+Detalhamento de gargalos logísticos, taxas de conversão por status e análise de regressão linear (*Ticket Médio vs. Volume de Pedidos*).
+
+![Visão Analítica](Analitico.png)
+
+### 3. Visão Exploratória (Causa Raiz)
+Análise interativa com **Árvore Hierárquica** em 4 níveis (*Status > Meio de Pagamento > Parcelas > Ano*) e **Gráfico de Cascata** para variação mensal.
+
+![Visão Exploratória](Exploratico.png)
+
+---
+
+## 💡 Principais Insights Extraídos
+
+| Pilar Estratégico | Indicador-Chave | Diagnóstico & Recomendação |
+| :--- | :--- | :--- |
+| **Eficiência Logística** | **97,02%** de entrega | Alta confiabilidade operacional em uma base de **99,4 mil pedidos** (~96,5 mil entregas concluídas), com cancelamentos controlados abaixo de **0,7%**. |
+| **Hegemonia do Crédito** | **78,3%** do faturamento (**R$ 12,1 Mi**) | Forte dependência do Cartão de Crédito (com destaque para parcelamentos em até 10x), reforçando a importância de políticas de crédito e parcelas sem juros. |
+| **Decisão Estratégica (Cross-selling)** | Tickets **> R$ 160** | A análise de correlação indica que picos de ticket médio comprimem o volume de pedidos, apontando oportunidades para campanhas de *cross-selling* e combos complementares. |
+
+---
+
+## 🚀 Como Visualizar ou Executar o Projeto
+
+### Opção 1 — Online (Sem instalação)
+Acesse diretamente a página interativa no navegador:  
+👉 **[https://vrsmarcos26.github.io/ecommerce-analytics-powerbi-olist/](https://vrsmarcos26.github.io/ecommerce-analytics-powerbi-olist/)**
+
+### Opção 2 — Localmente no Power BI Desktop
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/vrsmarcos26/ecommerce-analytics-powerbi-olist.git
+   ```
+2. Certifique-se de ter o [Microsoft Power BI Desktop](https://powerbi.microsoft.com/desktop/) instalado (gratuito).
+3. Abra o arquivo `Projeto_CD.pbix`.
+4. Os dados já estão embarcados no modelo — navegue pelas abas inferiores para explorar cada camada.
+
+---
+
+## 👨‍💻 Autor
+
+**Marcos Vinícius** — Analista de Dados / Desenvolvedor de BI  
+[![Portfólio](https://img.shields.io/badge/Portf%C3%B3lio-vrsmarcos26.github.io-0F4C81?style=flat-square&logo=googlechrome&logoColor=white)](https://vrsmarcos26.github.io/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-vrsmarcos26-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vrsmarcos26)
+[![GitHub](https://img.shields.io/badge/GitHub-vrsmarcos26-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/vrsmarcos26)
+[![Instagram](https://img.shields.io/badge/Instagram-@__marcos.vrs-E4405F?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/_marcos.vrs/)
