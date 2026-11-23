@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio de Análise Estratégica do E-commerce Brasileiro (Olist) — Projeto de conclusão da disciplina de Ciência de Dados do CEUB por Marcos Vinícius." />
+  <title>Marcos Vinícius | Análise Estratégica do E-commerce Brasileiro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-page: #f3f6fa;
+      --bg-surface: #ffffff;
+      --bg-subtle: #eaf0f7;
+      --bg-header: rgba(255, 255, 255, 0.88);
+      --primary: #0f4c81;
+      --primary-hover: #0a365c;
+      --primary-light: #e4effa;
+      --accent: #0078d4;
+      --accent-soft: #eef6fd;
+
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+
+      --border-light: #e2e8f0;
+      --border-strong: #cbd5e1;
+
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 26px -8px rgba(15, 76, 129, 0.09), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 22px 44px -14px rgba(15, 76, 129, 0.16), 0 6px 14px -4px rgba(15, 23, 42, 0.06);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --container-max: 1180px;
+    }
+
+    html[data-theme="dark"] {
+      --bg-page: #0b111a;
+      --bg-surface: #111a27;
+      --bg-subtle: #172233;
+      --bg-header: rgba(17, 26, 39, 0.88);
+      --primary: #3898ec;
+      --primary-hover: #5aa9f0;
+      --primary-light: rgba(56, 152, 236, 0.14);
+      --accent: #4aa3f0;
+      --accent-soft: rgba(74, 163, 240, 0.12);
+
+      --text-main: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --border-light: #1e2d42;
+      --border-strong: #2c405c;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 12px 28px -8px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bg-header);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 12px 0;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, #0f4c81 0%, #0078d4 100%);
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      display: grid;
+      place-items: center;
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .brand-role {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn,
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light);
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      text-decoration: none;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+    }
+
+    .icon-btn:hover,
+    .social-link:hover {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .icon-btn svg,
+    .social-link svg {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+    }
+
+    .controls-divider {
+      width: 1px;
+      height: 24px;
+      background-color: var(--border-light);
+      margin: 0 2px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 52px 0 32px;
+    }
+
+    .hero-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0f4c81 0%, #0078d4 55%, #38bdf8 100%);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(56, 152, 236, 0.22);
+    }
+
+    .badge--neutral {
+      background-color: var(--bg-subtle);
+      color: var(--text-secondary);
+      border-color: var(--border-light);
+    }
+
+    .hero-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      max-width: 24ch;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      color: var(--primary);
+    }
+
+    .hero-description {
+      font-size: 1.04rem;
+      color: var(--text-secondary);
+      max-width: 74ch;
+      margin-bottom: 24px;
+    }
+
+    .hero-description strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta-item strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Dashboard Section */
+    .dashboard-section {
+      padding: 20px 0 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 0.925rem;
+      color: var(--text-secondary);
+      max-width: 56ch;
+    }
+
+    .dashboard-wrapper {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Contêiner 16:9 Responsivo para o iframe do Power BI */
+    .ratio-16x9 {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 300px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+    }
+
+    .ratio-16x9 iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .dashboard-caption {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 0 4px;
+    }
+
+    /* Insights Section (3 Colunas) */
+    .insights-section {
+      padding: 16px 0 64px;
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .insight-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .insight-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background-color: var(--primary-light);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      background-color: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .card-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .card-kpi {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-size: 0.935rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .card-desc strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-light);
+      padding: 28px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsividade */
+    @media (max-width: 960px) {
+      .insights-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .social-link .label-text {
+        display: none;
+      }
+
+      .social-link {
+        padding: 9px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 28px 0 22px;
+      }
+
+      .hero-card {
+        padding: 24px 20px;
+      }
+
+      .dashboard-wrapper {
+        padding: 10px;
+      }
+
+      .ratio-16x9 {
+        aspect-ratio: auto;
+        min-height: 360px;
+      }
+
+      .insight-card {
+        padding: 22px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-group">
+        <div class="brand-mark" aria-hidden="true">MV</div>
+        <div>
+          <div class="brand-name">Marcos Vinícius</div>
+          <div class="brand-role" data-i18n="role">Analista de Dados / Desenvolvedor de BI</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <nav class="social-links" aria-label="Redes sociais e portfólio">
+          <a
+            class="social-link"
+            href="https://vrsmarcos26.github.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Portfólio"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span class="label-text" data-i18n="navPortfolio">Portfólio</span>
+          </a>
+
+          <a
+            class="social-link"
+            href="https://www.linkedin.com/in/vrsmarcos26"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn vrsmarcos26"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5ZM6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56ZM8.27 18.5V10.13H5.5V18.5H8.27Z"/>
+            </svg>
+            <span class="label-text">LinkedIn</span>
+          </a>
+
+          <a
+            class="social-link"
+            href="https://github.com/vrsmarcos26"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub vrsmarcos26"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2A10 10 0 0 0 8.84 21.5C9.34 21.58 9.52 21.27 9.52 21V19.31C6.73 19.91 6.14 17.97 6.14 17.97C5.68 16.81 5.03 16.5 5.03 16.5C4.12 15.88 5.1 15.9 5.1 15.9C6.1 15.97 6.63 16.93 6.63 16.93C7.52 18.45 8.97 18 9.54 17.76C9.63 17.11 9.89 16.67 10.17 16.42C7.95 16.17 5.62 15.31 5.62 11.5C5.62 10.39 6 9.5 6.65 8.79C6.55 8.54 6.2 7.5 6.75 6.15C6.75 6.15 7.59 5.88 9.5 7.17C10.29 6.95 11.15 6.84 12 6.84C12.85 6.84 13.71 6.95 14.5 7.17C16.41 5.88 17.25 6.15 17.25 6.15C17.8 7.5 17.45 8.54 17.35 8.79C18 9.5 18.38 10.39 18.38 11.5C18.38 15.32 16.04 16.16 13.81 16.41C14.17 16.72 14.5 17.33 14.5 18.26V21C14.5 21.27 14.68 21.59 15.18 21.5A10 10 0 0 0 12 2Z"/>
+            </svg>
+            <span class="label-text">GitHub</span>
+          </a>
+
+          <a
+            class="social-link"
+            href="https://www.instagram.com/_marcos.vrs/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram _marcos.vrs"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+            </svg>
+            <span class="label-text">Instagram</span>
+          </a>
+        </nav>
+
+        <span class="controls-divider" aria-hidden="true"></span>
+
+        <button type="button" class="icon-btn" id="langToggle" aria-label="Alternar idioma PT-BR e EN">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m5 8 6 6"/>
+            <path d="m4 14 6-6 2-3"/>
+            <path d="M2 5h12"/>
+            <path d="M7 2h1"/>
+            <path d="m22 22-5-10-5 10"/>
+            <path d="M14 18h6"/>
+          </svg>
+          <span id="langLabel">EN</span>
+        </button>
+
+        <button type="button" class="icon-btn" id="themeToggle" aria-label="Alternar modo claro e escuro">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+          </svg>
+          <span id="themeLabel">Escuro</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="badge-row">
+            <span class="badge" data-i18n="badgeCapstone">Projeto de Conclusão · Ciência de Dados (CEUB)</span>
+            <span class="badge badge--neutral" data-i18n="badgeDataset">Dataset Público Olist</span>
+            <span class="badge badge--neutral">KDD · Power Query · DAX</span>
+          </div>
+
+          <h1 class="hero-title" data-i18n="heroTitle">
+            Análise Estratégica do <span>E-commerce Brasileiro</span>
+          </h1>
+
+          <p class="hero-description" data-i18n="heroDesc">
+            Projeto acadêmico desenvolvido para a disciplina de Ciência de Dados do <strong>CEUB</strong> a partir dos datasets públicos do <strong>Olist</strong>. Todo o pipeline analítico seguiu o processo <strong>KDD</strong>, com tratamento e modelagem via <strong>ETL no Power Query</strong> e construção de métricas e indicadores executivos com <strong>inteligência DAX</strong>.
+          </p>
+
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <strong data-i18n="metaBaseLabel">Base Analisada:</strong>
+              <span data-i18n="metaBaseValue">99,4 mil pedidos (Olist)</span>
+            </div>
+            <div class="hero-meta-item">
+              <strong data-i18n="metaPipelineLabel">Etapas:</strong>
+              <span data-i18n="metaPipelineValue">KDD, ETL (Power Query) &amp; DAX</span>
+            </div>
+            <div class="hero-meta-item">
+              <strong data-i18n="metaInstLabel">Instituição:</strong>
+              <span>CEUB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Área do Dashboard (16:9 Responsivo) -->
+    <section class="dashboard-section" id="dashboard">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-label" data-i18n="dashLabel">Dashboard Interativo</div>
+            <h2 class="section-title" data-i18n="dashTitle">Visão Executiva em Power BI</h2>
+          </div>
+          <p class="section-subtitle" data-i18n="dashSubtitle">
+            Explore os indicadores de logística, meios de pagamento e comportamento de ticket médio ao longo das operações.
+          </p>
+        </div>
+
+        <div class="dashboard-wrapper">
+          <div class="ratio-16x9">
+            <iframe
+              title="Projeto_CD"
+              src="https://app.powerbi.com/view?r=eyJrIjoiZmJjNzllZTItNDQ0MC00YjllLWEwZjktMGMxNWY0Y2I0NjAwIiwidCI6ImY4NzhiZTY5LWNiODAtNDBiMC04OTVlLTg0Y2ZjMTcxZWQ5MSJ9&pageName=abf79f51b462a325fa0d"
+              allowFullScreen="true"
+            ></iframe>
+          </div>
+
+          <div class="dashboard-caption">
+            <span data-i18n="dashSource">Fonte: Olist Brazilian E-Commerce Public Dataset</span>
+            <span data-i18n="dashRatio">Proporção 16:9 responsiva · Otimizado para desktop e mobile</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Cards de Insights (3 Colunas) -->
+    <section class="insights-section" id="insights">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-label" data-i18n="insightsLabel">Principais Descobertas</div>
+            <h2 class="section-title" data-i18n="insightsTitle">Insights Estratégicos do Projeto</h2>
+          </div>
+        </div>
+
+        <div class="insights-grid">
+          <!-- Card 1 -->
+          <article class="insight-card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
+                    <path d="M15 18H9"/>
+                    <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
+                    <circle cx="17" cy="18" r="2"/>
+                    <circle cx="7" cy="18" r="2"/>
+                  </svg>
+                </div>
+                <span class="card-tag" data-i18n="card1Tag">Operações &amp; SLA</span>
+              </div>
+              <h3 class="card-title" data-i18n="card1Title">Eficiência Logística</h3>
+              <div class="card-kpi">97,02%</div>
+              <p class="card-desc" data-i18n="card1Desc">
+                Taxa de entrega concluída em uma base de <strong>99,4 mil pedidos</strong>, evidenciando alta capilaridade e confiabilidade operacional no cumprimento do ciclo de entrega.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="insight-card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="5" rx="2"/>
+                    <line x1="2" x2="22" y1="10" y2="10"/>
+                  </svg>
+                </div>
+                <span class="card-tag" data-i18n="card2Tag">Meios de Pagamento</span>
+              </div>
+              <h3 class="card-title" data-i18n="card2Title">Hegemonia do Crédito</h3>
+              <div class="card-kpi" data-i18n="card2Kpi">78% · R$ 12,1 Mi</div>
+              <p class="card-desc" data-i18n="card2Desc">
+                O <strong>Cartão de Crédito</strong> concentra <strong>78% do faturamento</strong> (totalizando <strong>R$ 12,1 Mi</strong>), reforçando o papel do parcelamento na viabilização de compras no comércio eletrônico brasileiro.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="insight-card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3v18h18"/>
+                    <path d="m19 9-5 5-4-4-3 3"/>
+                  </svg>
+                </div>
+                <span class="card-tag" data-i18n="card3Tag">Estratégia Comercial</span>
+              </div>
+              <h3 class="card-title" data-i18n="card3Title">Decisão Estratégica (Cross-selling)</h3>
+              <div class="card-kpi">&gt; R$ 160</div>
+              <p class="card-desc" data-i18n="card3Desc">
+                Equilíbrio entre <strong>volume de vendas</strong> e <strong>tickets altos (&gt; R$ 160)</strong>, apontando oportunidades de cross-selling e recomendações complementares para elevar o valor médio por pedido sem perder conversão.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 5. Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-links">
+        <span><span data-i18n="footerContact">Contato:</span> <a href="mailto:marcos.vinicius@exemplo.com">marcos.vinicius@exemplo.com</a></span>
+        <a href="https://vrsmarcos26.github.io/" target="_blank" rel="noopener noreferrer">vrsmarcos26.github.io</a>
+        <a href="https://www.instagram.com/_marcos.vrs/" target="_blank" rel="noopener noreferrer">@_marcos.vrs</a>
+      </div>
+      <div>
+        &copy; <span id="ano-atual">2026</span> Marcos Vinícius · <span data-i18n="footerRights">Todos os direitos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      'pt-BR': {
+        pageTitle: 'Marcos Vinícius | Análise Estratégica do E-commerce Brasileiro',
+        role: 'Analista de Dados / Desenvolvedor de BI',
+        navPortfolio: 'Portfólio',
+        badgeCapstone: 'Projeto de Conclusão · Ciência de Dados (CEUB)',
+        badgeDataset: 'Dataset Público Olist',
+        heroTitle: 'Análise Estratégica do <span>E-commerce Brasileiro</span>',
+        heroDesc: 'Projeto acadêmico desenvolvido para a disciplina de Ciência de Dados do <strong>CEUB</strong> a partir dos datasets públicos do <strong>Olist</strong>. Todo o pipeline analítico seguiu o processo <strong>KDD</strong>, com tratamento e modelagem via <strong>ETL no Power Query</strong> e construção de métricas e indicadores executivos com <strong>inteligência DAX</strong>.',
+        metaBaseLabel: 'Base Analisada:',
+        metaBaseValue: '99,4 mil pedidos (Olist)',
+        metaPipelineLabel: 'Etapas:',
+        metaPipelineValue: 'KDD, ETL (Power Query) & DAX',
+        metaInstLabel: 'Instituição:',
+        dashLabel: 'Dashboard Interativo',
+        dashTitle: 'Visão Executiva em Power BI',
+        dashSubtitle: 'Explore os indicadores de logística, meios de pagamento e comportamento de ticket médio ao longo das operações.',
+        dashSource: 'Fonte: Olist Brazilian E-Commerce Public Dataset',
+        dashRatio: 'Proporção 16:9 responsiva · Otimizado para desktop e mobile',
+        insightsLabel: 'Principais Descobertas',
+        insightsTitle: 'Insights Estratégicos do Projeto',
+        card1Tag: 'Operações & SLA',
+        card1Title: 'Eficiência Logística',
+        card1Desc: 'Taxa de entrega concluída em uma base de <strong>99,4 mil pedidos</strong>, evidenciando alta capilaridade e confiabilidade operacional no cumprimento do ciclo de entrega.',
+        card2Tag: 'Meios de Pagamento',
+        card2Title: 'Hegemonia do Crédito',
+        card2Kpi: '78% · R$ 12,1 Mi',
+        card2Desc: 'O <strong>Cartão de Crédito</strong> concentra <strong>78% do faturamento</strong> (totalizando <strong>R$ 12,1 Mi</strong>), reforçando o papel do parcelamento na viabilização de compras no comércio eletrônico brasileiro.',
+        card3Tag: 'Estratégia Comercial',
+        card3Title: 'Decisão Estratégica (Cross-selling)',
+        card3Desc: 'Equilíbrio entre <strong>volume de vendas</strong> e <strong>tickets altos (&gt; R$ 160)</strong>, apontando oportunidades de cross-selling e recomendações complementares para elevar o valor médio por pedido sem perder conversão.',
+        footerContact: 'Contato:',
+        footerRights: 'Todos os direitos reservados.',
+        langButtonText: 'EN',
+        themeDarkText: 'Escuro',
+        themeLightText: 'Claro'
+      },
+      'en': {
+        pageTitle: 'Marcos Vinícius | Strategic Analysis of Brazilian E-commerce',
+        role: 'Data Analyst / BI Developer',
+        navPortfolio: 'Portfolio',
+        badgeCapstone: 'Capstone Project · Data Science (CEUB)',
+        badgeDataset: 'Olist Public Dataset',
+        heroTitle: 'Strategic Analysis of <span>Brazilian E-commerce</span>',
+        heroDesc: 'Academic capstone project developed for the Data Science course at <strong>CEUB</strong> using <strong>Olist</strong> public datasets. The analytical pipeline followed the <strong>KDD</strong> process, with data preparation and modeling via <strong>Power Query ETL</strong> and executive KPIs built using <strong>DAX intelligence</strong>.',
+        metaBaseLabel: 'Dataset Scope:',
+        metaBaseValue: '99.4k orders (Olist)',
+        metaPipelineLabel: 'Pipeline:',
+        metaPipelineValue: 'KDD, ETL (Power Query) & DAX',
+        metaInstLabel: 'Institution:',
+        dashLabel: 'Interactive Dashboard',
+        dashTitle: 'Executive View in Power BI',
+        dashSubtitle: 'Explore logistics performance, payment methods, and average order value dynamics across operations.',
+        dashSource: 'Source: Olist Brazilian E-Commerce Public Dataset',
+        dashRatio: '16:9 responsive container · Optimized for desktop and mobile',
+        insightsLabel: 'Key Findings',
+        insightsTitle: 'Strategic Project Insights',
+        card1Tag: 'Operations & SLA',
+        card1Title: 'Logistics Efficiency',
+        card1Desc: 'On-time/completed delivery rate across <strong>99.4k orders</strong>, highlighting strong operational reliability and fulfillment coverage.',
+        card2Tag: 'Payment Methods',
+        card2Title: 'Credit Card Dominance',
+        card2Kpi: '78% · BRL 12.1M',
+        card2Desc: '<strong>Credit Cards</strong> drive <strong>78% of revenue</strong> (totaling <strong>BRL 12.1M</strong>), underscoring the role of installments in Brazilian online retail.',
+        card3Tag: 'Commercial Strategy',
+        card3Title: 'Strategic Decision (Cross-selling)',
+        card3Desc: 'Balance between <strong>order volume</strong> and <strong>high tickets (&gt; BRL 160)</strong>, pointing to cross-selling opportunities to lift average order value without hurting conversion.',
+        footerContact: 'Contact:',
+        footerRights: 'All rights reserved.',
+        langButtonText: 'PT',
+        themeDarkText: 'Dark',
+        themeLightText: 'Light'
+      }
+    };
+
+    const htmlEl = document.documentElement;
+    const langToggle = document.getElementById('langToggle');
+    const langLabel = document.getElementById('langLabel');
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+    const themeIcon = document.getElementById('themeIcon');
+
+    const moonSvg = '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>';
+    const sunSvg = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>';
+
+    function getInitialLang() {
+      const saved = localStorage.getItem('portfolio_lang');
+      if (saved === 'pt-BR' || saved === 'en') return saved;
+      return navigator.language && navigator.language.toLowerCase().startsWith('en') ? 'en' : 'pt-BR';
+    }
+
+    function getInitialTheme() {
+      const saved = localStorage.getItem('portfolio_theme');
+      if (saved === 'light' || saved === 'dark') return saved;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyLang(lang) {
+      const dict = translations[lang] || translations['pt-BR'];
+      htmlEl.lang = lang;
+      document.title = dict.pageTitle;
+      langLabel.textContent = dict.langButtonText;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      updateThemeLabel(htmlEl.getAttribute('data-theme'));
+      localStorage.setItem('portfolio_lang', lang);
+    }
+
+    function updateThemeLabel(theme) {
+      const lang = htmlEl.lang === 'en' ? 'en' : 'pt-BR';
+      const dict = translations[lang];
+      if (theme === 'dark') {
+        themeLabel.textContent = dict.themeLightText;
+        themeIcon.innerHTML = sunSvg;
+      } else {
+        themeLabel.textContent = dict.themeDarkText;
+        themeIcon.innerHTML = moonSvg;
+      }
+    }
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      updateThemeLabel(theme);
+      localStorage.setItem('portfolio_theme', theme);
+    }
+
+    langToggle.addEventListener('click', () => {
+      const nextLang = htmlEl.lang === 'en' ? 'pt-BR' : 'en';
+      applyLang(nextLang);
+    });
+
+    themeToggle.addEventListener('click', () => {
+      const current = htmlEl.getAttribute('data-theme');
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    applyTheme(getInitialTheme());
+    applyLang(getInitialLang());
+
+    const elAno = document.getElementById('ano-atual');
+    if (elAno) {
+      elAno.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>
